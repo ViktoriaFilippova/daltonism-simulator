@@ -12,7 +12,7 @@
   }
   *{box-sizing:border-box;margin:0;padding:0}
   body{background:var(--ink);color:var(--paper);font-family:'Inter',-apple-system,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased;min-height:100vh}
-  .wrap{max-width:920px;margin:0 auto;padding:38px 22px 90px}
+  .wrap{position:relative;max-width:920px;margin:0 auto;padding:38px 22px 90px}
   .eyebrow{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.2em;text-transform:uppercase;color:var(--acid);margin-bottom:14px}
   h1{font-family:'Bebas Neue',Impact,sans-serif;font-weight:400;font-size:clamp(40px,7vw,68px);line-height:0.92;text-transform:uppercase;letter-spacing:-0.01em;margin-bottom:12px}
   h1 .y{color:var(--acid)}
@@ -91,10 +91,90 @@
     if (typeof ym === "function") ym(METRIKA_ID, "reachGoal", goal, params || {});
   }
 </script>
+<script>
+/* ===== RU / EN ===== */
+var I18N = {
+  ru: {
+    title: 'Цветовой тест — симулятор дальтонизма',
+    eyebrow: '● Симулятор · Kikodoc.design',
+    h1: 'Цвет, который <span class="y">ты не видишь</span>',
+    intro: 'Восемь процентов мужчин путают цвета — и почти всегда не знают об этом. Выбери тип цветовосприятия, покрути тяжесть, посмотри на реальные сценарии. А в конце — загрузи свой макет и проверь его.',
+    types: {
+      deuter: ['Дейтеранопия','красно-зелёная · самая частая'],
+      protan: ['Протанопия','красно-зелёная · другой механизм'],
+      tritan: ['Тританопия','сине-жёлтая · редкая'],
+      achroma:['Ахроматопсия','полное отсутствие цвета']
+    },
+    sevLabel: 'Тяжесть',
+    sevHint: 'У большинства людей потеря частичная (аномальная трихромазия), а не полная. Покрути ползунок — увидишь разницу между лёгкой формой и полной.',
+    tabs: { status:'Статусы заказа', chart:'График', metro:'Схема линий', photo:'Фото' },
+    scen: {
+      status: { title:'Статусы заказа', sub:'Красный «отменён» и зелёный «доставлен» — различаются только цветом.',
+        dx:'<b>Что ломается:</b> оба статуса становятся одинаковыми. Пользователь не понимает, отменён его заказ или доставлен. <b>Фикс:</b> иконка (✓ / ✕) плюс цвет — форма читается всегда.' },
+      chart: { title:'График', sub:'Три линии различаются только оттенком — красная, зелёная, оранжевая.',
+        dx:'<b>Что ломается:</b> линии сливаются, легенда бесполезна. <b>Фикс:</b> разные типы штриха (сплошная, пунктир, точки) плюс подписи прямо на линиях.' },
+      metro: { title:'Схема линий', sub:'Ветки на схеме различаются только цветом — как в метро.',
+        dx:'<b>Что ломается:</b> красная и зелёная ветки неотличимы, пересадку не найти. <b>Фикс:</b> номера линий и названия, не только цвет.' },
+      photo: { title:'Фото · реальные сцены', sub:'Тепловая карта и спелые ягоды среди листьев — там, где цвет несёт весь смысл.',
+        dx:'<b>Что ломается:</b> на тепловой карте «красное» и «зелёное» — это «плохо» и «хорошо». Для 8% они сливаются, и график начинает врать. Ягоды теряются среди листьев — сборщик проходит мимо спелых. <b>Фикс в интерфейсе:</b> не только цвет — подпись значения, паттерн, форма. Нажми тумблер и посмотри оригинал: разница и есть то, что твой пользователь не видит.' }
+    },
+    fixPhoto: 'Показать <b>оригинал</b> — как видит человек без дальтонизма',
+    fixOther: 'Показать <b>исправленную</b> версию — со вторым признаком',
+    names: { deuter:'дейтеранопия', protan:'протанопия', tritan:'тританопия', achroma:'ахроматопсия' },
+    svg: { cancelled:'Отменён', delivered:'Доставлен', transit:'В пути', sales:'Продажи', traffic:'Трафик', returns:'Возвраты',
+      badgeOrig:'оригинал · полный цвет', badgeEyes:'глазами: ', capHeat:'Тепловая карта: значение закодировано только цветом', capBerry:'Спелые ягоды среди листьев — красное на зелёном' },
+    upTitle:'Проверь свой макет', upSub:'Перетащи скриншот интерфейса — увидишь его глазами выбранного типа. Всё считается у тебя в браузере, никуда не загружается.',
+    upT:'Перетащи изображение сюда', upS:'или нажми, чтобы выбрать файл · PNG, JPG',
+    canvNote:'Твой макет глазами: ',
+    foot:'<b>Про точность.</b> Симуляция построена на матрицах Machado (2009) — это научная модель, её же используют браузерные инструменты. Но это приближение, а не точная копия зрения конкретного человека. Единственный надёжный тест — показать макет человеку с дальтонизмом.<br><br><b>Правило, которое всё решает:</b> цвет не должен быть единственным носителем смысла. Иконка, подпись, паттерн — второй признак спасает 8% твоих пользователей. Kikodoc.design'
+  },
+  en: {
+    title: 'The Color You Cannot See — colorblindness simulator',
+    eyebrow: '● Simulator · Kikodoc.design',
+    h1: 'The color <span class="y">you cannot see</span>',
+    intro: 'Eight percent of men confuse colors — and most never know it. Pick a vision type, adjust the severity, walk through real scenarios. Then upload your own mockup and test it.',
+    types: {
+      deuter: ['Deuteranopia','red-green · most common'],
+      protan: ['Protanopia','red-green · different mechanism'],
+      tritan: ['Tritanopia','blue-yellow · rare'],
+      achroma:['Achromatopsia','no color at all']
+    },
+    sevLabel: 'Severity',
+    sevHint: 'For most people the loss is partial (anomalous trichromacy), not complete. Drag the slider to see the difference between a mild form and a full one.',
+    tabs: { status:'Order statuses', chart:'Chart', metro:'Line map', photo:'Photos' },
+    scen: {
+      status: { title:'Order statuses', sub:'Red “cancelled” and green “delivered” differ by color only.',
+        dx:'<b>What breaks:</b> both statuses look identical. The user cannot tell whether the order was cancelled or delivered. <b>Fix:</b> an icon (✓ / ✕) plus color — shape always reads.' },
+      chart: { title:'Chart', sub:'Three lines differ by hue only — red, green, orange.',
+        dx:'<b>What breaks:</b> the lines merge, the legend becomes useless. <b>Fix:</b> different stroke styles (solid, dashed, dotted) plus labels right on the lines.' },
+      metro: { title:'Line map', sub:'Routes differ by color only — like a metro map.',
+        dx:'<b>What breaks:</b> the red and green lines are indistinguishable, the transfer is lost. <b>Fix:</b> line numbers and names, not just color.' },
+      photo: { title:'Photos · real scenes', sub:'A heat map and ripe berries among leaves — where color carries all the meaning.',
+        dx:'<b>What breaks:</b> on a heat map, “red” and “green” mean “bad” and “good”. For 8% they merge, and the chart starts lying. Berries dissolve into the leaves — the picker walks past the ripe ones. <b>Fix in UI:</b> never color alone — a value label, a pattern, a shape. Flip the toggle to see the original: the difference is exactly what your user cannot see.' }
+    },
+    fixPhoto: 'Show the <b>original</b> — as seen without colorblindness',
+    fixOther: 'Show the <b>fixed</b> version — with a second cue',
+    names: { deuter:'deuteranopia', protan:'protanopia', tritan:'tritanopia', achroma:'achromatopsia' },
+    svg: { cancelled:'Cancelled', delivered:'Delivered', transit:'In transit', sales:'Sales', traffic:'Traffic', returns:'Returns',
+      badgeOrig:'original · full color', badgeEyes:'seen with: ', capHeat:'Heat map: the value is encoded by color alone', capBerry:'Ripe berries among leaves — red on green' },
+    upTitle:'Test your own mockup', upSub:'Drop a screenshot of your interface — see it through the selected vision type. Everything runs in your browser, nothing is uploaded.',
+    upT:'Drop an image here', upS:'or click to choose a file · PNG, JPG',
+    canvNote:'Your mockup seen with: ',
+    foot:'<b>About accuracy.</b> The simulation uses Machado (2009) matrices — a research-grade model, the same one browser tools rely on. It is an approximation, not an exact copy of any individual’s vision. The only reliable test is showing your mockup to a person with colorblindness.<br><br><b>The rule that settles everything:</b> color must never be the only carrier of meaning. An icon, a label, a pattern — a second cue saves 8% of your users. Kikodoc.design'
+  }
+};
+var LANG = (function(){
+  try { var v = localStorage.getItem('kikodoc_lang'); if (v==='ru'||v==='en') return v; } catch(e){}
+  return (navigator.language||'').toLowerCase().indexOf('ru')===0 ? 'ru' : 'en';
+})();
+function L(){ return I18N[LANG]; }
+</script>
+
 <noscript><div><img src="https://mc.yandex.ru/watch/110440302" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 </head>
 <body>
 <div class="wrap">
+  <button id="langToggle" style="position:absolute;top:26px;right:28px;font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.1em;background:none;border:1.5px solid var(--line);border-radius:8px;color:var(--muted);padding:7px 12px;cursor:pointer" aria-label="Switch language"></button>
   <div class="eyebrow">● Симулятор · Kikodoc.design</div>
   <h1>Цвет, который <span class="y">ты не видишь</span></h1>
   <p class="intro">Восемь процентов мужчин путают цвета — и почти всегда не знают об этом. Выбери тип цветовосприятия, покрути тяжесть, посмотри на реальные сценарии. А в конце — загрузи свой макет и проверь его.</p>
@@ -229,9 +309,9 @@
 
   function statusSVG(fixed){
     var rows=[
-      {c:'#E8453C', t:'Отменён', ic:'M6 6 L18 18 M18 6 L6 18'},
-      {c:'#1FA363', t:'Доставлен', ic:'M5 12 L10 17 L19 7'},
-      {c:'#E8934C', t:'В пути', ic:'M12 6 v6 l4 2'}
+      {c:'#E8453C', t:L().svg.cancelled, ic:'M6 6 L18 18 M18 6 L6 18'},
+      {c:'#1FA363', t:L().svg.delivered, ic:'M5 12 L10 17 L19 7'},
+      {c:'#E8934C', t:L().svg.transit, ic:'M12 6 v6 l4 2'}
     ];
     var y=40, h='';
     rows.forEach(function(r){
@@ -251,9 +331,9 @@
   // переопределяю statusSVG с transform для иконок
   statusSVG=function(fixed){
     var rows=[
-      {c:'#E8453C', t:'Отменён', ic:'<path d="M7 7 L17 17 M17 7 L7 17" stroke="#fff" stroke-width="2.5" fill="none" stroke-linecap="round"/>'},
-      {c:'#1FA363', t:'Доставлен', ic:'<path d="M6 12 L10 16 L18 8" stroke="#fff" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>'},
-      {c:'#E8934C', t:'В пути', ic:'<path d="M12 7 v5 l4 2" stroke="#fff" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>'}
+      {c:'#E8453C', t:L().svg.cancelled, ic:'<path d="M7 7 L17 17 M17 7 L7 17" stroke="#fff" stroke-width="2.5" fill="none" stroke-linecap="round"/>'},
+      {c:'#1FA363', t:L().svg.delivered, ic:'<path d="M6 12 L10 16 L18 8" stroke="#fff" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>'},
+      {c:'#E8934C', t:L().svg.transit, ic:'<path d="M12 7 v5 l4 2" stroke="#fff" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>'}
     ];
     var y=40, h='';
     rows.forEach(function(r){
@@ -268,9 +348,9 @@
 
   function chartSVG(fixed){
     var lines=[
-      {c:'#E8453C', pts:'30,150 120,110 210,120 300,60 390,80 470,40', dash:'0', name:'Продажи'},
-      {c:'#1FA363', pts:'30,170 120,160 210,130 300,140 390,110 470,120', dash:'8 6', name:'Возвраты'},
-      {c:'#E8934C', pts:'30,120 120,130 210,90 300,100 390,60 470,70', dash:'2 6', name:'Трафик'}
+      {c:'#E8453C', pts:'30,150 120,110 210,120 300,60 390,80 470,40', dash:'0', name:L().svg.sales},
+      {c:'#1FA363', pts:'30,170 120,160 210,130 300,140 390,110 470,120', dash:'8 6', name:L().svg.returns},
+      {c:'#E8934C', pts:'30,120 120,130 210,90 300,100 390,60 470,70', dash:'2 6', name:L().svg.traffic}
     ];
     var h='';
     lines.forEach(function(l){
@@ -309,8 +389,7 @@
   }
 
   function photoSVG(original){
-    var names={deuter:'дейтеранопия',protan:'протанопия',tritan:'тританопия',achroma:'ахроматопсия'};
-    var badge = original ? 'оригинал · полный цвет' : ('глазами: '+names[state.type]);
+    var badge = original ? L().svg.badgeOrig : (L().svg.badgeEyes + L().names[state.type]);
     var badgeBg = original ? '#1FA363' : '#0A0A0A';
     var h='<rect width="500" height="660" fill="#fff"/>';
     // бейдж режима
@@ -318,10 +397,10 @@
     h+='<text x="250" y="25" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="12" fill="#fff">'+badge+'</text>';
     // фото 1 — тепловая карта
     h+='<image x="10" y="44" width="480" height="270" href="'+PHOTO_GRID+'" xlink:href="'+PHOTO_GRID+'" preserveAspectRatio="xMidYMid meet"/>';
-    h+='<text x="10" y="334" font-family="Inter,sans-serif" font-size="13" fill="#555">Тепловая карта: значение закодировано только цветом</text>';
+    h+='<text x="10" y="334" font-family="Inter,sans-serif" font-size="13" fill="#555">'+L().svg.capHeat+'</text>';
     // фото 2 — ягоды
     h+='<image x="10" y="352" width="480" height="270" href="'+PHOTO_BERRY+'" xlink:href="'+PHOTO_BERRY+'" preserveAspectRatio="xMidYMid meet"/>';
-    h+='<text x="10" y="642" font-family="Inter,sans-serif" font-size="13" fill="#555">Спелые ягоды среди листьев — красное на зелёном</text>';
+    h+='<text x="10" y="642" font-family="Inter,sans-serif" font-size="13" fill="#555">'+L().svg.capBerry+'</text>';
     return '<svg viewBox="0 0 500 660" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">'+h+'</svg>';
   }
 
@@ -329,13 +408,14 @@
   var svgwrap=document.getElementById('svgwrap');
   function renderScenario(){
     var s=SCEN[state.scenario];
-    document.getElementById('scenTitle').textContent=s.title;
-    document.getElementById('scenSub').textContent=s.sub;
-    document.getElementById('dx').innerHTML=s.dx;
+    var tx=L().scen[state.scenario];
+    document.getElementById('scenTitle').textContent=tx.title;
+    document.getElementById('scenSub').textContent=tx.sub;
+    document.getElementById('dx').innerHTML=tx.dx;
     // подпись тумблера зависит от сценария: у фото нет «второго признака», есть оригинал
     document.getElementById('fixLabel').innerHTML = (state.scenario==='photo')
-      ? 'Показать <b>оригинал</b> — как видит человек без дальтонизма'
-      : 'Показать <b>исправленную</b> версию — со вторым признаком';
+      ? L().fixPhoto
+      : L().fixOther;
     var markup = state.fix ? s.fixed() : s.normal();
     // фото в режиме «оригинал» показываю без фильтра — это и есть точка сравнения
     var showOriginal = (state.scenario==='photo' && state.fix);
@@ -359,8 +439,7 @@
       px[i+2]=clamp(m[6]*r+m[7]*g+m[8]*b);
     }
     ctx.putImageData(d,0,0);
-    var names={deuter:'дейтеранопия',protan:'протанопия',tritan:'тританопия',achroma:'ахроматопсия'};
-    document.getElementById('canvNote').textContent='Твой макет глазами: '+names[state.type]+' '+Math.round(state.severity*100)+'%';
+    document.getElementById('canvNote').textContent=L().canvNote+L().names[state.type]+' '+Math.round(state.severity*100)+'%';
   }
   function clamp(v){ return v<0?0:(v>255?255:v); }
 
@@ -419,8 +498,43 @@
     reader.readAsDataURL(file);
   }
 
+  function applyLang(){
+    var t = L();
+    document.documentElement.lang = LANG;
+    document.title = t.title;
+    document.querySelector('.eyebrow').textContent = t.eyebrow;
+    document.querySelector('h1').innerHTML = t.h1;
+    document.querySelector('.intro').textContent = t.intro;
+    document.querySelectorAll('#types .type').forEach(function(b){
+      var tt = t.types[b.dataset.type];
+      b.innerHTML = tt[0] + '<small>' + tt[1] + '</small>';
+    });
+    document.querySelector('.sev-label').textContent = t.sevLabel;
+    document.querySelector('.sev-hint').textContent = t.sevHint;
+    document.querySelectorAll('#scentabs .scentab').forEach(function(b){
+      b.textContent = t.tabs[b.dataset.scen];
+    });
+    var stages = document.querySelectorAll('.stage');
+    var up = stages[stages.length-1];
+    up.querySelector('.stage-title').textContent = t.upTitle;
+    up.querySelector('.stage-sub').textContent = t.upSub;
+    document.querySelector('.upload-t').textContent = t.upT;
+    document.querySelector('.upload-s').textContent = t.upS;
+    document.querySelector('.foot').innerHTML = t.foot;
+    document.getElementById('langToggle').textContent = LANG === 'ru' ? 'EN' : 'RU';
+    renderScenario();
+    var cn = document.getElementById('canvNote');
+    if (cn) cn.textContent = t.canvNote + t.names[state.type] + ' ' + Math.round(state.severity*100) + '%';
+  }
+  document.getElementById('langToggle').addEventListener('click', function(){
+    LANG = LANG === 'ru' ? 'en' : 'ru';
+    try { localStorage.setItem('kikodoc_lang', LANG); } catch(e){}
+    track('lang_switch', { lang: LANG });
+    applyLang();
+  });
+
   // init
-  updateSvgFilter(); renderScenario();
+  updateSvgFilter(); applyLang();
 })();
 </script>
 </body>
